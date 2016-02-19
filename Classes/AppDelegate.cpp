@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "SplashScene.h"
 
 USING_NS_CC;
 
@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     director->setAnimationInterval(1.0 / 60);
     FileUtils::getInstance()->addSearchPath("res");
 
-    auto scene = HelloWorld::createScene();
+    auto scene = SplashScene::createScene();
     director->runWithScene(scene);
 
     return true;

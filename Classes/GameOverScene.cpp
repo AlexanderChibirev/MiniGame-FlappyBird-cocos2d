@@ -1,4 +1,4 @@
-#include "HelloWorldScene.h"
+#include "GameOverScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -6,18 +6,18 @@ USING_NS_CC;
 
 using namespace cocostudio::timeline;
 
-Scene* HelloWorld::createScene()
+Scene* GameOverScene::createScene()
 {
 	//объект сцены затем экземпл€р нашего класа экземпл€р
     auto scene = Scene::create();
-    auto layer = HelloWorld::create();
+    auto layer = GameOverScene::create();
 	//добавл€ем слой на сцену
     scene->addChild(layer);
 	//и возвращаем сцену, котора€ потом передаетс€ в AppDelegate
     return scene;
 }
 
-bool HelloWorld::init()
+bool GameOverScene::init()
 {
     if ( !Layer::init() )
     {
@@ -34,7 +34,7 @@ bool HelloWorld::init()
 
 	////////////////////////////
 	//загружаем картинку
-	auto sprite = Sprite::create("C:\\MyDocuments\\Cocos\\CocosProjects\\FlappyBird\\Resources\\bird.png");
+	auto sprite = Sprite::create("bird.png");
 	//мен€ем ориджин, т.е. точку позиционировани€ на левую нижнюю 
 	sprite->setAnchorPoint(Vec2(0, 0));
 	//задаем ей позицию
