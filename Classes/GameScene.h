@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Pipe.h"
+#include "Bird.h"
 #include "cocos2d.h"
 
 
@@ -12,7 +14,16 @@ public:
     CREATE_FUNC(GameScene);//выдел€ет экземпл€р нашего класса
 
 private:
-	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { sceneWorld = world; };
+	void SetPhysicsWorld(cocos2d::PhysicsWorld *world)
+	{
+		sceneWorld = world; 
+	};
+
+	void SpawnPipe(float dt);
 
 	cocos2d::PhysicsWorld *sceneWorld;
+
+	Pipe pipe;
+
+	Bird *bird;
 };

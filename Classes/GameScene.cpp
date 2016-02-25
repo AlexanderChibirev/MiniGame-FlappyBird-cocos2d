@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
-
+#include "Definitions.h"
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -46,8 +46,14 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
+	this->schedule(schedule_selector(GameScene::SpawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oтвечает за запуск запланированного обратного вызова//запускаем функцию создание(порождение труб) каждые 0.5 сек
 
-
+	bird = new Bird(this);
     return true;
 }
 //объекты созданные с помощью create можно не удалять так как это делают умные указатели 
+
+void GameScene::SpawnPipe(float dt)
+{
+	pipe.SpawnPipe(this);
+}

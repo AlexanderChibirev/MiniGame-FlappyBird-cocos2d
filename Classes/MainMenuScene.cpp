@@ -1,6 +1,6 @@
 #include "MainMenuScene.h"
 #include "GameScene.h"
-#include "Difinitions.h"
+#include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
