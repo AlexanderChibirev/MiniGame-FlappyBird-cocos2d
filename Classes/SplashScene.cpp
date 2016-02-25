@@ -3,7 +3,7 @@
 #include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
-
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -25,7 +25,9 @@ bool SplashScene::init()
     {
         return false;
     }
-	
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Hit.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Point.wav");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	//задержка фунеции на 2.5 сек

@@ -11,8 +11,8 @@ Pipe::Pipe()
 
 void Pipe::SpawnPipe(cocos2d::Layer *layer)
 {
-	auto topPipe = Sprite::create("Pipe.png");
-	auto bottomPipe = Sprite::create("Pipe.png");
+	auto topPipe = Sprite::create("kaktus.png");
+	auto bottomPipe = Sprite::create("kaktus.png");
 
 	auto topPipeBody = PhysicsBody::createBox(topPipe->getContentSize());
 	auto bottomPipeBody = PhysicsBody::createBox(bottomPipe->getContentSize());

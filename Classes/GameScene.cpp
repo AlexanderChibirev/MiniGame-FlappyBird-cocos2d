@@ -12,9 +12,8 @@ Scene* GameScene::createScene()
 	//создаем сцену с физикой
 	auto scene = Scene::createWithPhysics();
 	//подключаем физику
-	scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//показывает коллизии
 	scene-> getPhysicsWorld()->setGravity(Vect(0,0));
-
     auto layer = GameScene::create();
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
 	//добавл€ем слой на сцену 
@@ -71,13 +70,14 @@ bool GameScene::init()
 	//задаем размеры и шрифт
 	scoreLabel = Label::createWithTTF(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
 	//задаем цвет
-	scoreLabel->setColor(Color3B::WHITE);
+	scoreLabel->setColor(Color3B::BLACK);
 	//задаем позицию
 	scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
 	//а тут хуй пойми че
 	this->addChild(scoreLabel, 10000);
 
 	this->scheduleUpdate();
+
 
 	return true;
 }
@@ -97,13 +97,14 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
 		//создаем €рлычек с помощью функции создани€ шрифта
-
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Hit.wav");
 		auto scene = GameOverScene::createScene(score);
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 	}
 
 	else if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && POINT_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Point.wav");
 		score++;
 		__String *tempScore = __String::createWithFormat("%i", score);
 		scoreLabel->setString(tempScore->getCString());
