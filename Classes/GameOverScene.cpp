@@ -48,36 +48,12 @@ bool GameOverScene::init()
 
 	this->addChild(menu);
 
-	//для базы данных
-	UserDefault *def = UserDefault::getInstance();
-
-	auto highScore = def->getIntegerForKey("HIGHSCORE PlAYER", 0);
-
-	if (score > highScore)
-	{
-		highScore = score;
-
-		def->setIntegerForKey("HIGHSCORE PlAYER", highScore);
-	}
-	def->flush();
-	////////////////////////
 	__String *tempScore = __String::createWithFormat("%i", score);
 
 	auto currentScore = LabelTTF::create(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);//будет предупреждение, что функция до сих пор работает 
-	currentScore->setPosition(Point(visibleSize.width * 0.25 + origin.x, visibleSize.height / 2 + origin.y));
+	currentScore->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.5 + origin.y));
 	currentScore->setColor(Color3B::BLACK);
 	this->addChild(currentScore);
-
-	//для базы данных
-	__String *tempHighScore = __String::createWithFormat("%i", highScore);
-
-	auto highScoreLabel = LabelTTF::create(tempHighScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
-
-	highScoreLabel->setColor(Color3B::RED);
-	highScoreLabel->setPosition(Point(visibleSize.width * 0.75 + origin.x, visibleSize.height / 2 + origin.y));
-
-	this->addChild(highScoreLabel);
-	//////////////////
 
 	return true;
 }
