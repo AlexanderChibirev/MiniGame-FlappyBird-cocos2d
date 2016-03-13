@@ -18,7 +18,7 @@ Scene* MainMenuScene::createScene()
 	//и возвращаем сцену, которая потом передается в AppDelegate
     return scene;
 }
-
+//главный инит)
 bool MainMenuScene::init()
 {
     if ( !Layer::init() )
@@ -33,7 +33,7 @@ bool MainMenuScene::init()
 	this->addChild(backgroundSprite);
 
 	//создание кнопки
-	auto playItem = MenuItemImage::create("Star Button.png", "Start Button Clicked.png", CC_CALLBACK_1(MainMenuScene::GoToGameScene, this));
+	auto playItem = MenuItemImage::create("Star Button.png", "Start Button Clicked.png", CC_CALLBACK_1(MainMenuScene::goToGameScene, this));
 	playItem->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
 	auto menu = Menu::create(playItem, NULL);
@@ -47,7 +47,7 @@ bool MainMenuScene::init()
 }
 //объекты созданные с помощью create можно не удалять так как это делают умные указатели 
 //когда мы получаем сигнал о том что отпустили кнопку, мы переходим в эту функцию
-void MainMenuScene::GoToGameScene(cocos2d::Ref *sender)
+void MainMenuScene::goToGameScene(cocos2d::Ref *sender)
 {
 	auto scene = GameScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFlipX::create(1, scene));

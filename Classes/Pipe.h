@@ -8,9 +8,9 @@ class Pipe
 public:
 	Pipe();
 
-	void SpawnPipe(cocos2d::Layer *layer);
+	void spawnPipe(cocos2d::Layer *layer);
 
 private:
-	cocos2d::Size visibleSize;
-	cocos2d::Vec2 origin;
+	cocos2d::Size m_visibleSize;
+	cocos2d::Vec2 m_origin;
 };

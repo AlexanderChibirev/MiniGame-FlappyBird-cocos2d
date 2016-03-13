@@ -32,7 +32,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
 	
 	director->setDisplayStats(true);
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(float(1.0 / 60));
     FileUtils::getInstance()->addSearchPath("res");
 
     auto scene = SplashScene::createScene();

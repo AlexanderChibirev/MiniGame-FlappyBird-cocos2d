@@ -7,9 +7,9 @@ class SplashScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
-	virtual bool init();
+	virtual bool init() override ;
 	CREATE_FUNC(SplashScene);//выдел€ет экземпл€р нашего класса
 
 private:
-	void GoToMainMenuScene(float dt);
+	void goToMainMenuScene(float dt);
 };

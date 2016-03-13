@@ -18,10 +18,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SplashScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainMenuScene.cpp">
+    <ClCompile Include="..\Classes\Bird.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameOverScene.cpp">
@@ -30,10 +27,13 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MainMenuScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Pipe.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Bird.cpp">
+    <ClCompile Include="..\Classes\SplashScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SplashScene.h">
+    <ClInclude Include="..\Classes\Bird.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MainMenuScene.h">
+    <ClInclude Include="..\Classes\Definitions.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameOverScene.h">
@@ -56,13 +56,13 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Definitions.h">
+    <ClInclude Include="..\Classes\MainMenuScene.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Pipe.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Bird.h">
+    <ClInclude Include="..\Classes\SplashScene.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

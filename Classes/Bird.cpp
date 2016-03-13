@@ -5,34 +5,45 @@ USING_NS_CC;
 
 Bird::Bird( cocos2d::Layer *layer)
 {
-	visibleSize = Director::getInstance()->getVisibleSize();
-	origin = Director::getInstance()->getVisibleOrigin();
+	m_visibleSize = Director::getInstance()->getVisibleSize();
+	m_origin = Director::getInstance()->getVisibleOrigin();
 
-	flappyBird = Sprite::create("birdForGame.png");
-	flappyBird->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	m_flappyBird = Sprite::create("birdForGame.png");
+	m_flappyBird->setPosition(Point(m_visibleSize.width / 2 + m_origin.x, m_visibleSize.height / 2 + m_origin.y));
 
-	auto flappyBody = PhysicsBody::createCircle(flappyBird->getContentSize().width / 2); //создаем тело с физикой
+	auto flappyBody = PhysicsBody::createCircle(m_flappyBird->getContentSize().width / 2); //создаем тело с физикой
 	
 	flappyBody->setCollisionBitmask(BIRD_COLLISION_BITMASK); 
 	flappyBody->setContactTestBitmask(true);
 
-	flappyBird->setPhysicsBody(flappyBody);
+	m_flappyBird->setPhysicsBody(flappyBody);
 
-	layer->addChild(flappyBird, 100);
+	layer->addChild(m_flappyBird, 100);
 
-	isFalling = true;
+	m_isFalling = true;
+
 }
 
-void Bird::Fall()
+void Bird::fly()
 {
-	if (true == isFalling)
+	m_isFalling = false;
+}
+
+void Bird::stopFlying()
+{
+	m_isFalling = true;
+}
+
+void Bird::fall()
+{
+	if (true == m_isFalling)
 	{
-		flappyBird->setPositionX(visibleSize.width / 2 + origin.x);
-		flappyBird->setPositionY(flappyBird->getPositionY() - (BIRD_FALLING_SPEED * visibleSize.height));
+		m_flappyBird->setPositionX(m_visibleSize.width / 2 + m_origin.x);
+		m_flappyBird->setPositionY(m_flappyBird->getPositionY() - (BIRD_FALLING_SPEED * m_visibleSize.height));
 	}
 	else
 	{
-		flappyBird->setPositionX(visibleSize.width / 2 + origin.x);
-		flappyBird->setPositionY(flappyBird->getPositionY() + (BIRD_FALLING_SPEED * visibleSize.height));
+		m_flappyBird->setPositionX(m_visibleSize.width / 2 + m_origin.x);
+		m_flappyBird->setPositionY(m_flappyBird->getPositionY() + (BIRD_FALLING_SPEED * m_visibleSize.height));
 	}
 }

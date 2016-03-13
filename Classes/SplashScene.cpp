@@ -31,7 +31,7 @@ bool SplashScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	//задержка фунеции на 2.5 сек
-	this->scheduleOnce(schedule_selector(SplashScene::GoToMainMenuScene), DISPLAY_TIME_SPLASH_SCENE);
+	this->scheduleOnce(schedule_selector(SplashScene::goToMainMenuScene), DISPLAY_TIME_SPLASH_SCENE);
 	
 	
 	//////////////////////////////
@@ -55,7 +55,7 @@ bool SplashScene::init()
 
 
 
-void SplashScene::GoToMainMenuScene( float dt )
+void SplashScene::goToMainMenuScene( float dt )
 {	
 	//объект сцены
     auto scene = MainMenuScene::createScene();

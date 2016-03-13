@@ -5,11 +5,11 @@ USING_NS_CC;
 
 Pipe::Pipe()
 {
-	visibleSize = Director::getInstance()->getVisibleSize();
-	origin = Director::getInstance()->getVisibleOrigin();
+	m_visibleSize = Director::getInstance()->getVisibleSize();
+	m_origin = Director::getInstance()->getVisibleOrigin();
 }
 
-void Pipe::SpawnPipe(cocos2d::Layer *layer)
+void Pipe::spawnPipe(cocos2d::Layer *layer)
 {
 	auto topPipe = Sprite::create("kaktus.png");
 	auto bottomPipe = Sprite::create("kaktus.png");
@@ -28,7 +28,7 @@ void Pipe::SpawnPipe(cocos2d::Layer *layer)
 		random = float(UPPER_SCREEN_PIPE_THRESHOLD);
 	}
 
-	auto topPipePosition = (random * visibleSize.height) + (topPipe->getContentSize().height/2);
+	auto topPipePosition = (random * m_visibleSize.height) + (topPipe->getContentSize().height/2);
 
 	topPipeBody->setDynamic(false);
 	bottomPipeBody->setDynamic(false);
@@ -41,14 +41,14 @@ void Pipe::SpawnPipe(cocos2d::Layer *layer)
 	topPipe->setPhysicsBody(topPipeBody);
 	bottomPipe->setPhysicsBody(bottomPipeBody);
 
-	topPipe->setPosition(Point(visibleSize.width + topPipe->getContentSize().width + origin.x, topPipePosition));
+	topPipe->setPosition(Point(m_visibleSize.width + topPipe->getContentSize().width + m_origin.x, topPipePosition));
 	bottomPipe->setPosition(Point(topPipe->getPositionX(), topPipePosition - (Sprite::create("birdForGame.png")->getContentSize().height * PIPE_GAP) - topPipe->getContentSize().height));
 
 	layer->addChild(topPipe);
 	layer->addChild(bottomPipe);
 
-	auto topPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 1.5, 0));
-	auto bottomPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 1.5, 0));
+	auto topPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * m_visibleSize.width, Point(-m_visibleSize.width * 1.5, 0));
+	auto bottomPipeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * m_visibleSize.width, Point(-m_visibleSize.width * 1.5, 0));
 
 	topPipe->runAction(topPipeAction);
 	bottomPipe->runAction(bottomPipeAction);
@@ -66,7 +66,7 @@ void Pipe::SpawnPipe(cocos2d::Layer *layer)
 
 	layer->addChild(pointNode);
 
-	auto pointNodeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * visibleSize.width, Point(-visibleSize.width * 1.5, 0));
+	auto pointNodeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * m_visibleSize.width, Point(-m_visibleSize.width * 1.5, 0));
 
 	pointNode->runAction(pointNodeAction);
 }

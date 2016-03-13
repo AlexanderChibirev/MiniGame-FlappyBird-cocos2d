@@ -15,12 +15,17 @@ Scene* GameScene::createScene()
 	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//показывает коллизии
 	scene-> getPhysicsWorld()->setGravity(Vect(0,0));
     auto layer = GameScene::create();
-	layer->SetPhysicsWorld(scene->getPhysicsWorld());
+	layer->setPhysicsWorld(scene->getPhysicsWorld());
 	//добавл€ем слой на сцену 
     scene->addChild(layer);
 	//и возвращаем сцену, котора€ потом передаетс€ в AppDelegate
     return scene;
 }
+
+void  GameScene::setPhysicsWorld(cocos2d::PhysicsWorld *world)
+{
+	m_sceneWorld = world;
+};
 
 bool GameScene::init()
 {
@@ -50,7 +55,7 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
-	this->schedule(schedule_selector(GameScene::SpawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oтвечает за запуск запланированного обратного вызова//запускаем функцию создание(порождение труб) каждые 0.5 сек
+	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oтвечает за запуск запланированного обратного вызова//запускаем функцию создание(порождение труб) каждые 0.5 сек
 
 	bird = new Bird(this);
 
@@ -64,17 +69,17 @@ bool GameScene::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	//создаем переменную содержащию очки
-	score = 0;
+	m_score = 0;
 	//задаем формат
-	__String *tempScore = __String::createWithFormat("%i", score);
+	__String *tempScore = __String::createWithFormat("%i", m_score);
 	//задаем размеры и шрифт
-	scoreLabel = Label::createWithTTF(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
+	m_scoreLabel = Label::createWithTTF(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
 	//задаем цвет
-	scoreLabel->setColor(Color3B::BLACK);
+	m_scoreLabel->setColor(Color3B::BLACK);
 	//задаем позицию
-	scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
+	m_scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
 	//а тут хуй пойми че
-	this->addChild(scoreLabel, 10000);
+	this->addChild(m_scoreLabel, 10000);
 
 	this->scheduleUpdate();
 
@@ -83,9 +88,9 @@ bool GameScene::init()
 }
 //объекты созданные с помощью create можно не удал€ть так как это делают умные указатели 
 
-void GameScene::SpawnPipe(float dt)
+void GameScene::spawnPipe(float dt)
 {
-	pipe.SpawnPipe(this);
+	pipe.spawnPipe(this);
 }
 
 bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
@@ -98,16 +103,16 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	{
 		//создаем €рлычек с помощью функции создани€ шрифта
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Hit.wav");
-		auto scene = GameOverScene::createScene(score);
+		auto scene = GameOverScene::createScene(m_score);
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 	}
 
 	else if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && POINT_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Point.wav");
-		score++;
-		__String *tempScore = __String::createWithFormat("%i", score);
-		scoreLabel->setString(tempScore->getCString());
+		m_score++;
+		__String *tempScore = __String::createWithFormat("%i", m_score);
+		m_scoreLabel->setString(tempScore->getCString());
 	}
 
 	return true;
@@ -115,19 +120,19 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 
 bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	bird->Fly();
+	bird->fly();
 
-	this->scheduleOnce(schedule_selector(GameScene::StopFlying), BIRD_FLY_DURATION);
+	this->scheduleOnce(schedule_selector(GameScene::stopFlying), BIRD_FLY_DURATION);
 
 	return true;
 }
 
-void GameScene::StopFlying(float dt)
+void GameScene::stopFlying(float dt)
 {
-	bird->StopFlying();
+	bird->stopFlying();
 }
 
 void GameScene::update(float dt)
 {
-	bird->Fall();
+	bird->fall();
 }

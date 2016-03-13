@@ -9,32 +9,30 @@ class GameScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
-	virtual bool init();
+	virtual bool init() override;
 
     CREATE_FUNC(GameScene);//выдел€ет экземпл€р нашего класса
 
 private:
-	void SetPhysicsWorld(cocos2d::PhysicsWorld *world)
-	{
-		sceneWorld = world; 
-	};
+	void setPhysicsWorld(cocos2d::PhysicsWorld *world);
 
-	void SpawnPipe(float dt);
+
+	void spawnPipe(float dt);
 
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
 
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
 
-	void StopFlying(float dt);
+	void stopFlying(float dt);
 	void update(float dt);
 
-	cocos2d::PhysicsWorld *sceneWorld;
+	cocos2d::PhysicsWorld *m_sceneWorld;
 
 	Pipe pipe;
 
 	Bird *bird;
 	
-	unsigned int score;
+	unsigned int m_score;
 	
-	cocos2d::Label *scoreLabel;
+	cocos2d::Label *m_scoreLabel;
 };

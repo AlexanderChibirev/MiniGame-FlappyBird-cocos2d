@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "MainMenuScene.h"
 #include "Definitions.h"
+#include <string>
 
 USING_NS_CC;
 int score;
@@ -37,10 +38,10 @@ bool GameOverScene::init()
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	this->addChild(backgroundSprite);
 	///////////////////////////////
-	auto retryItem = MenuItemImage::create("Retry Button.png", "Retry Button Clicked.png", CC_CALLBACK_1(GameOverScene::GoToGameScene, this));
+	auto retryItem = MenuItemImage::create("Retry Button.png", "Retry Button Clicked.png", CC_CALLBACK_1(GameOverScene::goToGameScene, this));
 	retryItem->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 4 * 3));
 
-	auto mainMenuItem = MenuItemImage::create("Menu Button.png", "Menu Button Clicked.png", CC_CALLBACK_1(GameOverScene::GoToMainMenuScene, this));
+	auto mainMenuItem = MenuItemImage::create("Menu Button.png", "Menu Button Clicked.png", CC_CALLBACK_1(GameOverScene::goToMainMenuScene, this));
 	mainMenuItem->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 4));
 
 	auto menu = Menu::create(retryItem, mainMenuItem, NULL);
@@ -48,9 +49,7 @@ bool GameOverScene::init()
 
 	this->addChild(menu);
 
-	__String *tempScore = __String::createWithFormat("%i", score);
-
-	auto currentScore = LabelTTF::create(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);//будет предупреждение, что функция до сих пор работает 
+	auto currentScore = LabelTTF::create(std::to_string(score), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);//будет предупреждение, что функция до сих пор работает 
 	currentScore->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.5 + origin.y));
 	currentScore->setColor(Color3B::BLACK);
 	this->addChild(currentScore);
@@ -58,14 +57,14 @@ bool GameOverScene::init()
 	return true;
 }
 
-void GameOverScene::GoToMainMenuScene(cocos2d::Ref *sender)
+void GameOverScene::goToMainMenuScene(cocos2d::Ref *sender)
 {
 	auto scene = MainMenuScene::createScene();
 
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }
 
-void GameOverScene::GoToGameScene(cocos2d::Ref *sender)
+void GameOverScene::goToGameScene(cocos2d::Ref *sender)
 {
 	auto scene = GameScene::createScene();
 
