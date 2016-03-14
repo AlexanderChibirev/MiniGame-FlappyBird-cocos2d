@@ -6,6 +6,10 @@
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
+GameScene::GameScene()
+{
+
+}
 
 Scene* GameScene::createScene()
 {

@@ -6,7 +6,7 @@
 class GameOverScene : public cocos2d::Layer
 {
 public:
-
+	GameOverScene();
 	static cocos2d::Scene* createScene(unsigned int tempScore);
 	virtual bool init() override ;
 

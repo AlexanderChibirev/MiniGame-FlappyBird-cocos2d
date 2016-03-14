@@ -9,6 +9,10 @@ Pipe::Pipe()
 	m_origin = Director::getInstance()->getVisibleOrigin();
 }
 
+void Pipe::create()
+{
+
+}
 void Pipe::spawnPipe(cocos2d::Layer *layer)
 {
 	auto topPipe = Sprite::create("kaktus.png");
@@ -69,6 +73,10 @@ void Pipe::spawnPipe(cocos2d::Layer *layer)
 	auto pointNodeAction = MoveBy::create(PIPE_MOVEMENT_SPEED * m_visibleSize.width, Point(-m_visibleSize.width * 1.5, 0));
 
 	pointNode->runAction(pointNodeAction);
+}
+bool Pipe::init()
+{
+	return true;
 }
 
 

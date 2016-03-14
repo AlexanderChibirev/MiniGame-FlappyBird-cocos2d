@@ -11,6 +11,11 @@ int score;
 
 using namespace cocostudio::timeline;
 
+GameOverScene::GameOverScene()
+{
+
+}
+
 Scene* GameOverScene::createScene(unsigned int tempScore)
 {
 	score = tempScore;

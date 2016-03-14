@@ -7,7 +7,8 @@ class Bird
 {
 public:
 	Bird(cocos2d::Layer *layer);
-
+	virtual bool init();
+	static void create();
 	void fall();
 	void fly();
 	void stopFlying();

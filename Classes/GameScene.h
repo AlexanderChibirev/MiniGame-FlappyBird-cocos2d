@@ -8,6 +8,7 @@
 class GameScene : public cocos2d::Layer
 {
 public:
+	GameScene();
     static cocos2d::Scene* createScene();
 	virtual bool init() override;
 

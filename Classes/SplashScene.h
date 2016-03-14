@@ -6,6 +6,7 @@
 class SplashScene : public cocos2d::Layer
 {
 public:
+	SplashScene();
     static cocos2d::Scene* createScene();
 	virtual bool init() override ;
 	CREATE_FUNC(SplashScene);//выдел€ет экземпл€р нашего класса

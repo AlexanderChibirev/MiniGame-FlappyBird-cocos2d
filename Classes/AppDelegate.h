@@ -9,6 +9,8 @@ public:
     AppDelegate();
     virtual ~AppDelegate() override;
 
+	static void create();
+	virtual bool init();
     virtual void initGLContextAttrs() override;
     virtual bool applicationDidFinishLaunching() override;
     virtual void applicationDidEnterBackground() override;

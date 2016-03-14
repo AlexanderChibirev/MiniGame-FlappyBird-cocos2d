@@ -8,6 +8,11 @@ USING_NS_CC;
 
 using namespace cocostudio::timeline;
 
+SplashScene::SplashScene()
+{
+
+}
+
 Scene* SplashScene::createScene()
 {
 	//объект сцены затем экземпляр нашего класа экземпляр

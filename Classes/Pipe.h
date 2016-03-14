@@ -7,7 +7,8 @@ class Pipe
 {
 public:
 	Pipe();
-
+	virtual bool init();
+	static void create();
 	void spawnPipe(cocos2d::Layer *layer);
 
 private:

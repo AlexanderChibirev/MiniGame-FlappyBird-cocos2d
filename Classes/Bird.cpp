@@ -24,6 +24,11 @@ Bird::Bird( cocos2d::Layer *layer)
 
 }
 
+void Bird::create()
+{
+
+}
+
 void Bird::fly()
 {
 	m_isFalling = false;
@@ -32,6 +37,11 @@ void Bird::fly()
 void Bird::stopFlying()
 {
 	m_isFalling = true;
+}
+
+bool Bird::init()
+{
+	return true;
 }
 
 void Bird::fall()
