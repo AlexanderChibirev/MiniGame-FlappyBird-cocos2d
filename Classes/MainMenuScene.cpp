@@ -52,7 +52,7 @@ bool MainMenuScene::init()
 }
 //объекты созданные с помощью create можно не удалять так как это делают умные указатели 
 //когда мы получаем сигнал о том что отпустили кнопку, мы переходим в эту функцию
-void MainMenuScene::goToGameScene(cocos2d::Ref *sender)
+void MainMenuScene::goToGameScene(cocos2d::Ref *sender)//обработчик событий
 {
 	auto scene = GameScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFlipX::create(1, scene));

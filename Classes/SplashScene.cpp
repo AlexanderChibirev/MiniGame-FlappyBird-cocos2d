@@ -49,6 +49,7 @@ bool SplashScene::init()
 	logoSprite->setPosition(Point(visibleSize.width / 1.9 , visibleSize.height / 4 ));
 	nameGame->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
+	//draw
 	this->addChild(backgroundSprite);
 	this->addChild(nameGame);
 	this->addChild(logoSprite);

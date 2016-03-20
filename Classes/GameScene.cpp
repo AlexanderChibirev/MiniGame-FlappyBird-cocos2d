@@ -16,7 +16,7 @@ Scene* GameScene::createScene()
 	//создаем сцену с физикой
 	auto scene = Scene::createWithPhysics();
 	//подключаем физику
-	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//показывает коллизии
+	scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//показывает коллизии
 	scene-> getPhysicsWorld()->setGravity(Vect(0,0));
     auto layer = GameScene::create();
 	layer->setPhysicsWorld(scene->getPhysicsWorld());
@@ -83,7 +83,7 @@ bool GameScene::init()
 	//задаем позицию
 	m_scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
 	//а тут хуй пойми че
-	this->addChild(m_scoreLabel, 10000);
+	this->addChild(m_scoreLabel);
 
 	this->scheduleUpdate();
 
