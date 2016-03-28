@@ -13,16 +13,16 @@ GameScene::GameScene()
 
 Scene* GameScene::createScene()
 {
-	//ñîçäàåì ñöåíó ñ ôèçèêîé
+	//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³ Ã± Ã´Ã¨Ã§Ã¨ÃªÃ®Ã©
 	auto scene = Scene::createWithPhysics();
-	//ïîäêëþ÷àåì ôèçèêó
-	scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//ïîêàçûâàåò êîëëèçèè
+	//Ã¯Ã®Ã¤ÃªÃ«Ã¾Ã·Ã Ã¥Ã¬ Ã´Ã¨Ã§Ã¨ÃªÃ³
+	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//Ã¯Ã®ÃªÃ Ã§Ã»Ã¢Ã Ã¥Ã² ÃªÃ®Ã«Ã«Ã¨Ã§Ã¨Ã¨
 	scene-> getPhysicsWorld()->setGravity(Vect(0,0));
     auto layer = GameScene::create();
 	layer->setPhysicsWorld(scene->getPhysicsWorld());
-	//äîáàâëÿåì ñëîé íà ñöåíó 
+	//Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¿Ã¥Ã¬ Ã±Ã«Ã®Ã© Ã­Ã  Ã±Ã¶Ã¥Ã­Ã³ 
     scene->addChild(layer);
-	//è âîçâðàùàåì ñöåíó, êîòîðàÿ ïîòîì ïåðåäàåòñÿ â AppDelegate
+	//Ã¨ Ã¢Ã®Ã§Ã¢Ã°Ã Ã¹Ã Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³, ÃªÃ®Ã²Ã®Ã°Ã Ã¿ Ã¯Ã®Ã²Ã®Ã¬ Ã¯Ã¥Ã°Ã¥Ã¤Ã Ã¥Ã²Ã±Ã¿ Ã¢ AppDelegate
     return scene;
 }
 
@@ -47,10 +47,10 @@ bool GameScene::init()
 
 
 
-	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3); //ôîðìà îêíà, êëàññ ôèçè÷åñêèé, è øèðèíà ëèíèè 1 = ïðîçðà÷íûé
+	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3); //Ã´Ã®Ã°Ã¬Ã  Ã®ÃªÃ­Ã , ÃªÃ«Ã Ã±Ã± Ã´Ã¨Ã§Ã¨Ã·Ã¥Ã±ÃªÃ¨Ã©, Ã¨ Ã¸Ã¨Ã°Ã¨Ã­Ã  Ã«Ã¨Ã­Ã¨Ã¨ 1 = Ã¯Ã°Ã®Ã§Ã°Ã Ã·Ã­Ã»Ã©
 
 	edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
-	edgeBody->setContactTestBitmask(true);//åñëè ñòîêíîâåíèå ñòàâèì òðó
+	edgeBody->setContactTestBitmask(true);//Ã¥Ã±Ã«Ã¨ Ã±Ã²Ã®ÃªÃ­Ã®Ã¢Ã¥Ã­Ã¨Ã¥ Ã±Ã²Ã Ã¢Ã¨Ã¬ Ã²Ã°Ã³
 
 	auto edgeNode = Node::create();
 	edgeNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
@@ -59,30 +59,30 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
-	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oòâå÷àåò çà çàïóñê çàïëàíèðîâàííîãî îáðàòíîãî âûçîâà//çàïóñêàåì ôóíêöèþ ñîçäàíèå(ïîðîæäåíèå òðóá) êàæäûå 0.5 ñåê
+	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oÃ²Ã¢Ã¥Ã·Ã Ã¥Ã² Ã§Ã  Ã§Ã Ã¯Ã³Ã±Ãª Ã§Ã Ã¯Ã«Ã Ã­Ã¨Ã°Ã®Ã¢Ã Ã­Ã­Ã®Ã£Ã® Ã®Ã¡Ã°Ã Ã²Ã­Ã®Ã£Ã® Ã¢Ã»Ã§Ã®Ã¢Ã //Ã§Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¾ Ã±Ã®Ã§Ã¤Ã Ã­Ã¨Ã¥(Ã¯Ã®Ã°Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¥ Ã²Ã°Ã³Ã¡) ÃªÃ Ã¦Ã¤Ã»Ã¥ 0.5 Ã±Ã¥Ãª
 
 	bird = new Bird(this);
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this); //getEventDispatcher ïðèíèìàåò ñîáûòèÿ //èñòàíò ìåíÿåò ñöåíû 
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this); //getEventDispatcher Ã¯Ã°Ã¨Ã­Ã¨Ã¬Ã Ã¥Ã² Ã±Ã®Ã¡Ã»Ã²Ã¨Ã¿ //Ã¨Ã±Ã²Ã Ã­Ã² Ã¬Ã¥Ã­Ã¿Ã¥Ã² Ã±Ã¶Ã¥Ã­Ã» 
     
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	//ñîçäàåì ïåðåìåííóþ ñîäåðæàùèþ î÷êè
+	//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã¯Ã¥Ã°Ã¥Ã¬Ã¥Ã­Ã­Ã³Ã¾ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã Ã¹Ã¨Ã¾ Ã®Ã·ÃªÃ¨
 	m_score = 0;
-	//çàäàåì ôîðìàò
+	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã´Ã®Ã°Ã¬Ã Ã²
 	__String *tempScore = __String::createWithFormat("%i", m_score);
-	//çàäàåì ðàçìåðû è øðèôò
+	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã°Ã Ã§Ã¬Ã¥Ã°Ã» Ã¨ Ã¸Ã°Ã¨Ã´Ã²
 	m_scoreLabel = Label::createWithTTF(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
-	//çàäàåì öâåò
+	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã¶Ã¢Ã¥Ã²
 	m_scoreLabel->setColor(Color3B::BLACK);
-	//çàäàåì ïîçèöèþ
+	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã¯Ã®Ã§Ã¨Ã¶Ã¨Ã¾
 	m_scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
-	//à òóò õóé ïîéìè ÷å
+	//Ã  Ã²Ã³Ã² ÃµÃ³Ã© Ã¯Ã®Ã©Ã¬Ã¨ Ã·Ã¥
 	this->addChild(m_scoreLabel);
 
 	this->scheduleUpdate();
@@ -90,7 +90,7 @@ bool GameScene::init()
 
 	return true;
 }
-//îáúåêòû ñîçäàííûå ñ ïîìîùüþ create ìîæíî íå óäàëÿòü òàê êàê ýòî äåëàþò óìíûå óêàçàòåëè 
+//Ã®Ã¡ÃºÃ¥ÃªÃ²Ã» Ã±Ã®Ã§Ã¤Ã Ã­Ã­Ã»Ã¥ Ã± Ã¯Ã®Ã¬Ã®Ã¹Ã¼Ã¾ create Ã¬Ã®Ã¦Ã­Ã® Ã­Ã¥ Ã³Ã¤Ã Ã«Ã¿Ã²Ã¼ Ã²Ã Ãª ÃªÃ Ãª Ã½Ã²Ã® Ã¤Ã¥Ã«Ã Ã¾Ã² Ã³Ã¬Ã­Ã»Ã¥ Ã³ÃªÃ Ã§Ã Ã²Ã¥Ã«Ã¨ 
 
 void GameScene::spawnPipe(float dt)
 {
@@ -102,10 +102,10 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	PhysicsBody *a = contact.getShapeA()->getBody();
 	PhysicsBody *b = contact.getShapeB()->getBody();
 
-	//ïðîâåðêà ñîïðèêîñíîâåíèÿ ïòè÷êè ñ êîíöîì ýêðàíà èëè ñ òðóáàìè, åñëè äà, òî ìåíÿåì ñöåíó, ñ ïåðåõîäîì 
+	//Ã¯Ã°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã±Ã®Ã¯Ã°Ã¨ÃªÃ®Ã±Ã­Ã®Ã¢Ã¥Ã­Ã¨Ã¿ Ã¯Ã²Ã¨Ã·ÃªÃ¨ Ã± ÃªÃ®Ã­Ã¶Ã®Ã¬ Ã½ÃªÃ°Ã Ã­Ã  Ã¨Ã«Ã¨ Ã± Ã²Ã°Ã³Ã¡Ã Ã¬Ã¨, Ã¥Ã±Ã«Ã¨ Ã¤Ã , Ã²Ã® Ã¬Ã¥Ã­Ã¿Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³, Ã± Ã¯Ã¥Ã°Ã¥ÃµÃ®Ã¤Ã®Ã¬ 
 	if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
-		//ñîçäàåì ÿðëû÷åê ñ ïîìîùüþ ôóíêöèè ñîçäàíèÿ øðèôòà
+		//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã¿Ã°Ã«Ã»Ã·Ã¥Ãª Ã± Ã¯Ã®Ã¬Ã®Ã¹Ã¼Ã¾ Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¨ Ã±Ã®Ã§Ã¤Ã Ã­Ã¨Ã¿ Ã¸Ã°Ã¨Ã´Ã²Ã 
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Hit.wav");
 		auto scene = GameOverScene::createScene(m_score);
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
