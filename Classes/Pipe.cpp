@@ -5,16 +5,15 @@ USING_NS_CC;
 
 Pipe::Pipe()
 {
-	m_visibleSize = Director::getInstance()->getVisibleSize();
-	m_origin = Director::getInstance()->getVisibleOrigin();
-}
-
-void Pipe::create()
-{
 
 }
+
+
 void Pipe::spawnPipe(cocos2d::Layer *layer)
 {
+	m_visibleSize = Director::getInstance()->getVisibleSize();
+	m_origin = Director::getInstance()->getVisibleOrigin();
+
 	auto topPipe = Sprite::create("kaktus.png");
 	auto bottomPipe = Sprite::create("kaktus.png");
 
@@ -76,6 +75,7 @@ void Pipe::spawnPipe(cocos2d::Layer *layer)
 }
 bool Pipe::init()
 {
+
 	return true;
 }
 

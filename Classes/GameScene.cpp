@@ -3,6 +3,7 @@
 #include "ui/CocosGUI.h"
 #include "Definitions.h"
 #include "GameOverScene.h"
+
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -13,16 +14,16 @@ GameScene::GameScene()
 
 Scene* GameScene::createScene()
 {
-	//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³ Ã± Ã´Ã¨Ã§Ã¨ÃªÃ®Ã©
+	//ñîçäàåì ñöåíó ñ ôèçèêîé
 	auto scene = Scene::createWithPhysics();
-	//Ã¯Ã®Ã¤ÃªÃ«Ã¾Ã·Ã Ã¥Ã¬ Ã´Ã¨Ã§Ã¨ÃªÃ³
-	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//Ã¯Ã®ÃªÃ Ã§Ã»Ã¢Ã Ã¥Ã² ÃªÃ®Ã«Ã«Ã¨Ã§Ã¨Ã¨
+	//ïîäêëþ÷àåì ôèçèêó
+	//scene-> getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);//ïîêàçûâàåò êîëëèçèè
 	scene-> getPhysicsWorld()->setGravity(Vect(0,0));
     auto layer = GameScene::create();
 	layer->setPhysicsWorld(scene->getPhysicsWorld());
-	//Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¿Ã¥Ã¬ Ã±Ã«Ã®Ã© Ã­Ã  Ã±Ã¶Ã¥Ã­Ã³ 
+	//äîáàâëÿåì ñëîé íà ñöåíó 
     scene->addChild(layer);
-	//Ã¨ Ã¢Ã®Ã§Ã¢Ã°Ã Ã¹Ã Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³, ÃªÃ®Ã²Ã®Ã°Ã Ã¿ Ã¯Ã®Ã²Ã®Ã¬ Ã¯Ã¥Ã°Ã¥Ã¤Ã Ã¥Ã²Ã±Ã¿ Ã¢ AppDelegate
+	//è âîçâðàùàåì ñöåíó, êîòîðàÿ ïîòîì ïåðåäàåòñÿ â AppDelegate
     return scene;
 }
 
@@ -47,10 +48,10 @@ bool GameScene::init()
 
 
 
-	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3); //Ã´Ã®Ã°Ã¬Ã  Ã®ÃªÃ­Ã , ÃªÃ«Ã Ã±Ã± Ã´Ã¨Ã§Ã¨Ã·Ã¥Ã±ÃªÃ¨Ã©, Ã¨ Ã¸Ã¨Ã°Ã¨Ã­Ã  Ã«Ã¨Ã­Ã¨Ã¨ 1 = Ã¯Ã°Ã®Ã§Ã°Ã Ã·Ã­Ã»Ã©
+	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3); //ôîðìà îêíà, êëàññ ôèçè÷åñêèé, è øèðèíà ëèíèè 1 = ïðîçðà÷íûé
 
 	edgeBody->setCollisionBitmask(OBSTACLE_COLLISION_BITMASK);
-	edgeBody->setContactTestBitmask(true);//Ã¥Ã±Ã«Ã¨ Ã±Ã²Ã®ÃªÃ­Ã®Ã¢Ã¥Ã­Ã¨Ã¥ Ã±Ã²Ã Ã¢Ã¨Ã¬ Ã²Ã°Ã³
+	edgeBody->setContactTestBitmask(true);//åñëè ñòîêíîâåíèå ñòàâèì òðó
 
 	auto edgeNode = Node::create();
 	edgeNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
@@ -59,30 +60,31 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
-	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oÃ²Ã¢Ã¥Ã·Ã Ã¥Ã² Ã§Ã  Ã§Ã Ã¯Ã³Ã±Ãª Ã§Ã Ã¯Ã«Ã Ã­Ã¨Ã°Ã®Ã¢Ã Ã­Ã­Ã®Ã£Ã® Ã®Ã¡Ã°Ã Ã²Ã­Ã®Ã£Ã® Ã¢Ã»Ã§Ã®Ã¢Ã //Ã§Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¾ Ã±Ã®Ã§Ã¤Ã Ã­Ã¨Ã¥(Ã¯Ã®Ã°Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¥ Ã²Ã°Ã³Ã¡) ÃªÃ Ã¦Ã¤Ã»Ã¥ 0.5 Ã±Ã¥Ãª
+	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oòâå÷àåò çà çàïóñê çàïëàíèðîâàííîãî îáðàòíîãî âûçîâà//çàïóñêàåì ôóíêöèþ ñîçäàíèå(ïîðîæäåíèå òðóá) êàæäûå 0.5 ñåê
 
-	bird = new Bird(this);
+	m_pBird = new Bird();
+	m_pBird->create(this);
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this); //getEventDispatcher Ã¯Ã°Ã¨Ã­Ã¨Ã¬Ã Ã¥Ã² Ã±Ã®Ã¡Ã»Ã²Ã¨Ã¿ //Ã¨Ã±Ã²Ã Ã­Ã² Ã¬Ã¥Ã­Ã¿Ã¥Ã² Ã±Ã¶Ã¥Ã­Ã» 
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this); //getEventDispatcher ïðèíèìàåò ñîáûòèÿ //èñòàíò ìåíÿåò ñöåíû 
     
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã¯Ã¥Ã°Ã¥Ã¬Ã¥Ã­Ã­Ã³Ã¾ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã Ã¹Ã¨Ã¾ Ã®Ã·ÃªÃ¨
+	//ñîçäàåì ïåðåìåííóþ ñîäåðæàùèþ î÷êè
 	m_score = 0;
-	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã´Ã®Ã°Ã¬Ã Ã²
+	//çàäàåì ôîðìàò
 	__String *tempScore = __String::createWithFormat("%i", m_score);
-	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã°Ã Ã§Ã¬Ã¥Ã°Ã» Ã¨ Ã¸Ã°Ã¨Ã´Ã²
+	//çàäàåì ðàçìåðû è øðèôò
 	m_scoreLabel = Label::createWithTTF(tempScore->getCString(), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
-	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã¶Ã¢Ã¥Ã²
+	//çàäàåì öâåò
 	m_scoreLabel->setColor(Color3B::BLACK);
-	//Ã§Ã Ã¤Ã Ã¥Ã¬ Ã¯Ã®Ã§Ã¨Ã¶Ã¨Ã¾
+	//çàäàåì ïîçèöèþ
 	m_scoreLabel->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.75 + origin.y));
-	//Ã  Ã²Ã³Ã² ÃµÃ³Ã© Ã¯Ã®Ã©Ã¬Ã¨ Ã·Ã¥
+	//à òóò õóé ïîéìè ÷å
 	this->addChild(m_scoreLabel);
 
 	this->scheduleUpdate();
@@ -90,7 +92,7 @@ bool GameScene::init()
 
 	return true;
 }
-//Ã®Ã¡ÃºÃ¥ÃªÃ²Ã» Ã±Ã®Ã§Ã¤Ã Ã­Ã­Ã»Ã¥ Ã± Ã¯Ã®Ã¬Ã®Ã¹Ã¼Ã¾ create Ã¬Ã®Ã¦Ã­Ã® Ã­Ã¥ Ã³Ã¤Ã Ã«Ã¿Ã²Ã¼ Ã²Ã Ãª ÃªÃ Ãª Ã½Ã²Ã® Ã¤Ã¥Ã«Ã Ã¾Ã² Ã³Ã¬Ã­Ã»Ã¥ Ã³ÃªÃ Ã§Ã Ã²Ã¥Ã«Ã¨ 
+//îáúåêòû ñîçäàííûå ñ ïîìîùüþ create ìîæíî íå óäàëÿòü òàê êàê ýòî äåëàþò óìíûå óêàçàòåëè 
 
 void GameScene::spawnPipe(float dt)
 {
@@ -102,10 +104,10 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	PhysicsBody *a = contact.getShapeA()->getBody();
 	PhysicsBody *b = contact.getShapeB()->getBody();
 
-	//Ã¯Ã°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã±Ã®Ã¯Ã°Ã¨ÃªÃ®Ã±Ã­Ã®Ã¢Ã¥Ã­Ã¨Ã¿ Ã¯Ã²Ã¨Ã·ÃªÃ¨ Ã± ÃªÃ®Ã­Ã¶Ã®Ã¬ Ã½ÃªÃ°Ã Ã­Ã  Ã¨Ã«Ã¨ Ã± Ã²Ã°Ã³Ã¡Ã Ã¬Ã¨, Ã¥Ã±Ã«Ã¨ Ã¤Ã , Ã²Ã® Ã¬Ã¥Ã­Ã¿Ã¥Ã¬ Ã±Ã¶Ã¥Ã­Ã³, Ã± Ã¯Ã¥Ã°Ã¥ÃµÃ®Ã¤Ã®Ã¬ 
+	//ïðîâåðêà ñîïðèêîñíîâåíèÿ ïòè÷êè ñ êîíöîì ýêðàíà èëè ñ òðóáàìè, åñëè äà, òî ìåíÿåì ñöåíó, ñ ïåðåõîäîì 
 	if ((BIRD_COLLISION_BITMASK == a->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == b->getCollisionBitmask()) || (BIRD_COLLISION_BITMASK == b->getCollisionBitmask() && OBSTACLE_COLLISION_BITMASK == a->getCollisionBitmask()))
 	{
-		//Ã±Ã®Ã§Ã¤Ã Ã¥Ã¬ Ã¿Ã°Ã«Ã»Ã·Ã¥Ãª Ã± Ã¯Ã®Ã¬Ã®Ã¹Ã¼Ã¾ Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¨ Ã±Ã®Ã§Ã¤Ã Ã­Ã¨Ã¿ Ã¸Ã°Ã¨Ã´Ã²Ã 
+		//ñîçäàåì ÿðëû÷åê ñ ïîìîùüþ ôóíêöèè ñîçäàíèÿ øðèôòà
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Hit.wav");
 		auto scene = GameOverScene::createScene(m_score);
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
@@ -124,7 +126,7 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 
 bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-	bird->fly();
+	m_pBird->fly();
 
 	this->scheduleOnce(schedule_selector(GameScene::stopFlying), BIRD_FLY_DURATION);
 
@@ -133,10 +135,10 @@ bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 
 void GameScene::stopFlying(float dt)
 {
-	bird->stopFlying();
+	m_pBird->stopFlying();
 }
 
 void GameScene::update(float dt)
 {
-	bird->fall();
+	m_pBird->fall();
 }

@@ -3,7 +3,12 @@
 
 USING_NS_CC;
 
-Bird::Bird( cocos2d::Layer *layer)
+Bird::Bird()
+{
+	
+}
+
+void Bird::create( cocos2d::Layer *layer)
 {
 	m_visibleSize = Director::getInstance()->getVisibleSize();
 	m_origin = Director::getInstance()->getVisibleOrigin();
@@ -12,8 +17,8 @@ Bird::Bird( cocos2d::Layer *layer)
 	m_flappyBird->setPosition(Point(m_visibleSize.width / 2 + m_origin.x, m_visibleSize.height / 2 + m_origin.y));
 
 	auto flappyBody = PhysicsBody::createCircle(m_flappyBird->getContentSize().width / 2); //создаем тело с физикой
-	
-	flappyBody->setCollisionBitmask(BIRD_COLLISION_BITMASK); 
+
+	flappyBody->setCollisionBitmask(BIRD_COLLISION_BITMASK);
 	flappyBody->setContactTestBitmask(true);
 
 	m_flappyBird->setPhysicsBody(flappyBody);
@@ -21,11 +26,6 @@ Bird::Bird( cocos2d::Layer *layer)
 	layer->addChild(m_flappyBird, 100);
 
 	m_isFalling = true;
-
-}
-
-void Bird::create()
-{
 
 }
 
@@ -39,10 +39,6 @@ void Bird::stopFlying()
 	m_isFalling = true;
 }
 
-bool Bird::init()
-{
-	return true;
-}
 
 void Bird::fall()
 {

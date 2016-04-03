@@ -31,7 +31,7 @@ private:
 
 	Pipe pipe;
 
-	Bird *bird;
+	Bird *m_pBird;
 	
 	unsigned int m_score;
 	
