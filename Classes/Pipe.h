@@ -8,7 +8,7 @@ class Pipe
 public:
 	Pipe();
 	virtual bool init();
-	void spawnPipe(cocos2d::Layer *layer);
+	void CreateTwoPipes(cocos2d::Layer *layer);
 
 private:
 	cocos2d::Size m_visibleSize;

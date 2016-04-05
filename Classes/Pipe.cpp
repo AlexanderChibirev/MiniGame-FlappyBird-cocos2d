@@ -9,7 +9,7 @@ Pipe::Pipe()
 }
 
 
-void Pipe::spawnPipe(cocos2d::Layer *layer)
+void Pipe::CreateTwoPipes(cocos2d::Layer *layer)
 {
 	m_visibleSize = Director::getInstance()->getVisibleSize();
 	m_origin = Director::getInstance()->getVisibleOrigin();

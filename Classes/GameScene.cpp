@@ -62,8 +62,9 @@ bool GameScene::init()
 
 	this->schedule(schedule_selector(GameScene::spawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);//schedule_selector oтвечает за запуск запланированного обратного вызова//запускаем функцию создание(порождение труб) каждые 0.5 сек
 
-	m_pBird = new Bird();
-	m_pBird->create(this);
+	m_pBird = Bird::create();
+	addChild(m_pBird);
+
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
@@ -96,7 +97,7 @@ bool GameScene::init()
 
 void GameScene::spawnPipe(float dt)
 {
-	pipe.spawnPipe(this);
+	pipe.CreateTwoPipes(this);
 }
 
 bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)

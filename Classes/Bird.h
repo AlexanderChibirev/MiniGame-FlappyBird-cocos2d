@@ -3,20 +3,18 @@
 #include "SimpleAudioEngine.h"  
 #include "cocos2d.h"
 
-class Bird
+class Bird: public cocos2d::Sprite
 {
 public:
 	Bird();
-	//virtual bool init();
-	void create(cocos2d::Layer *layer);
+	static Bird *create();
+	bool init() override;
 	void fall();
 	void fly();
 	void stopFlying();
 private:
 	cocos2d::Size m_visibleSize;
 	cocos2d::Vec2 m_origin;
-
-	cocos2d::Sprite *m_flappyBird;
 
 	bool m_isFalling;
 };
