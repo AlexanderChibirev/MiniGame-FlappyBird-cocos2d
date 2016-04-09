@@ -7,7 +7,6 @@
 #include <string>
 
 USING_NS_CC;
-//int score;
 
 using namespace cocostudio::timeline;
 
