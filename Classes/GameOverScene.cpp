@@ -7,7 +7,7 @@
 #include <string>
 
 USING_NS_CC;
-int score;
+//int score;
 
 using namespace cocostudio::timeline;
 
@@ -16,15 +16,11 @@ GameOverScene::GameOverScene()
 
 }
 
-Scene* GameOverScene::createScene(unsigned int tempScore)
+Scene* GameOverScene::createScene()
 {
-	score = tempScore;
-	//объект сцены затем экземпл€р нашего класа экземпл€р
     auto scene = Scene::create();
     auto layer = GameOverScene::create();
-	//добавл€ем слой на сцену
     scene->addChild(layer);
-	//и возвращаем сцену, котора€ потом передаетс€ в AppDelegate
     return scene;
 }
 
@@ -37,12 +33,11 @@ bool GameOverScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	////////////////////////////
-	//загружаем картинку
+
 	auto backgroundSprite = Sprite::create("bgForGame.png");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	this->addChild(backgroundSprite);
-	///////////////////////////////
+
 	auto retryItem = MenuItemImage::create("Retry Button.png", "Retry Button Clicked.png", CC_CALLBACK_1(GameOverScene::goToGameScene, this));
 	retryItem->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 4 * 3));
 
@@ -54,7 +49,8 @@ bool GameOverScene::init()
 
 	this->addChild(menu);
 
-	auto currentScore = LabelTTF::create(std::to_string(score), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);//будет предупреждение, что функци€ до сих пор работает 
+	int score = UserDefault::getInstance()->getIntegerForKey("score", 0);
+	auto currentScore = LabelTTF::create(std::to_string(score), "CyrilicOld.TTF", visibleSize.height * SCORE_FONT_SIZE);
 	currentScore->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.5 + origin.y));
 	currentScore->setColor(Color3B::BLACK);
 	this->addChild(currentScore);
@@ -74,4 +70,4 @@ void GameOverScene::goToGameScene(cocos2d::Ref *sender)
 	auto scene = GameScene::createScene();
 
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
-} //помощью create можно не удал€ть так как это делают умные указатели
+}

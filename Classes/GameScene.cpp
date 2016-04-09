@@ -110,7 +110,8 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	{
 		//создаем €рлычек с помощью функции создани€ шрифта
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Hit.wav");
-		auto scene = GameOverScene::createScene(m_score);
+		UserDefault::getInstance()->setIntegerForKey("score", m_score);
+		auto scene = GameOverScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 	}
 
